@@ -8,7 +8,7 @@ import './globals.css'
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
-// URL website Anda saat ini
+// URL website (Ganti jika sudah punya domain sendiri)
 const DOMAIN_URL = 'https://udrobbishima.netlify.app';
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: 'Supplier batu kapur (limestone) berkualitas di Tuban, Jawa Timur. Sedia batu kapur mentah, dolomit pertanian, dan batu urug. Siap kirim seluruh Indonesia.',
   generator: 'v0.app',
   
-  // 1. KATA KUNCI PENCARIAN (SEO)
+  // 1. KATA KUNCI SEO
   keywords: [
     'Jual Batu Kapur Tuban',
     'Supplier Limestone Jawa Timur',
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     'UD Robbi Shima Sutra'
   ],
 
-  // 2. VERIFIKASI GOOGLE (INI YANG ANDA MINTA)
+  // 2. KODE VERIFIKASI GOOGLE (YANG BARU)
   verification: {
-    google: 'google4bce493c847cfea7', 
+    google: 'GsjLlMTsa--TzIu_i9bzQpY8GPUVqVxrdEkqzPsSDQ8', 
   },
 
-  // 3. TAMPILAN SAAT DI SHARE (WA/FB)
+  // 3. TAMPILAN SHARE WA/FB
   openGraph: {
     title: 'UD Robbi Shima Sutra - Pusat Batu Kapur Tuban',
     description: 'Solusi kebutuhan batu kapur industri dan pertanian. Kualitas terjamin langsung dari tambang.',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
 }
 
-// 4. STRUKTUR DATA BISNIS (Agar Google Maps lebih paham)
+// 4. DATA BISNIS (JSON-LD)
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -90,16 +90,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // Mengubah lang menjadi "id" (Indonesia)
     <html lang="id">
       <body className={`font-sans antialiased`}>
-        {/* Script JSON-LD untuk Google */}
         <Script
           id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
         {children}
         <Analytics />
       </body>
