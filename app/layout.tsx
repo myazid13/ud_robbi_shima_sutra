@@ -2,15 +2,45 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
+// URL website Anda saat ini
+const DOMAIN_URL = 'https://udrobbishima.netlify.app';
+
 export const metadata: Metadata = {
-  title: 'UD Robbi Shima Sutra - Supplier Batu Kapur Berkualitas',
-  description: 'Supplier batu kapur terpercaya untuk kebutuhan industri konstruksi, semen, dan pertanian. Kualitas terjamin dengan pengalaman lebih dari 20 tahun.',
+  title: 'UD Robbi Shima Sutra - Jual Batu Kapur Tuban & Dolomit',
+  description: 'Supplier batu kapur (limestone) berkualitas di Tuban, Jawa Timur. Sedia batu kapur mentah, dolomit pertanian, dan batu urug. Siap kirim seluruh Indonesia.',
   generator: 'v0.app',
+  
+  // 1. KATA KUNCI PENCARIAN (SEO)
+  keywords: [
+    'Jual Batu Kapur Tuban',
+    'Supplier Limestone Jawa Timur',
+    'Harga Batu Kapur',
+    'Dolomit Pertanian Tuban',
+    'Batu Urug Tuban',
+    'UD Robbi Shima Sutra'
+  ],
+
+  // 2. VERIFIKASI GOOGLE (INI YANG ANDA MINTA)
+  verification: {
+    google: 'google4bce493c847cfea7', 
+  },
+
+  // 3. TAMPILAN SAAT DI SHARE (WA/FB)
+  openGraph: {
+    title: 'UD Robbi Shima Sutra - Pusat Batu Kapur Tuban',
+    description: 'Solusi kebutuhan batu kapur industri dan pertanian. Kualitas terjamin langsung dari tambang.',
+    url: DOMAIN_URL,
+    siteName: 'UD Robbi Shima Sutra',
+    locale: 'id_ID',
+    type: 'website',
+  },
+
   icons: {
     icon: [
       {
@@ -30,14 +60,46 @@ export const metadata: Metadata = {
   },
 }
 
+// 4. STRUKTUR DATA BISNIS (Agar Google Maps lebih paham)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  'name': 'UD Robbi Shima Sutra',
+  'image': `${DOMAIN_URL}/icon.svg`,
+  'description': 'Supplier Batu Kapur dan Dolomit Terpercaya di Tuban.',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'Kesamben Barat, Kesamben',
+    'addressLocality': 'Kec. Plumpang',
+    'addressRegion': 'Kabupaten Tuban',
+    'postalCode': '62382',
+    'addressCountry': 'ID'
+  },
+  'url': DOMAIN_URL,
+  'openingHoursSpecification': {
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    'opens': '08:00',
+    'closes': '17:00'
+  }
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    // Mengubah lang menjadi "id" (Indonesia)
+    <html lang="id">
       <body className={`font-sans antialiased`}>
+        {/* Script JSON-LD untuk Google */}
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        
         {children}
         <Analytics />
       </body>
